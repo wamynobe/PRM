@@ -1,11 +1,14 @@
 package com.example.prmmusic;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.media.MediaParser;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -14,7 +17,13 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MusicPlayerActivity extends AppCompatActivity {
+    private ObjectAnimator objectAnimator;
+    private CircleImageView imvc_dianhac;
     private ImageView imv_playandpause;
     private TextView tv_currenttime, tv_totalduration;
     private SeekBar sb_playseekbar;
@@ -28,6 +37,13 @@ public class MusicPlayerActivity extends AppCompatActivity {
         tv_currenttime = findViewById(R.id.tv_currentime);
         tv_totalduration = findViewById(R.id.tv_totalduration);
         sb_playseekbar = findViewById(R.id.sb_playseekbar);
+        imvc_dianhac = findViewById(R.id.imvc_dianhac);
+        objectAnimator = ObjectAnimator.ofFloat(imvc_dianhac, "rotation", 0f, 360f);
+        objectAnimator.setDuration(10000);
+        objectAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        objectAnimator.setRepeatMode(ValueAnimator.RESTART);
+        objectAnimator.setInterpolator(new LinearInterpolator());
+        objectAnimator.start();
         mediaPlayer = new MediaPlayer();
 
         sb_playseekbar.setMax(100);
@@ -48,6 +64,8 @@ public class MusicPlayerActivity extends AppCompatActivity {
             }
         });
         String urlSong = "https://firebasestorage.googleapis.com/v0/b/prmmusiclistener.appspot.com/o/Music%2Ftest.mp3?alt=media&token=60a18dc9-25f4-4c33-8193-a895a8940f67";
+        String urlImg = "https://yt3.ggpht.com/Vn34V_RSZY7jBw3UzivU_93m35T-___z2ZSDkV2I41Z30RnQqGhtQ0O8RCeNzHtRY1GTRbl-aiE=s48-c-k-c0x00ffffff-no-rj";
+        updateImgDiaNhac(urlImg);
         prepareMediaPlayer(urlSong);
 
     }
@@ -95,5 +113,8 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
         timerString = timerString + minutes + ":"+secondsString;
         return timerString;
+    }
+    public void updateImgDiaNhac(String imageUrl) {
+        Picasso.get().load(imageUrl).into(imvc_dianhac);
     }
 }

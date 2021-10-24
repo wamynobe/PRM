@@ -9,12 +9,22 @@
     tools:context=".MainActivity"
     >
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imvc_dianhac"
+        android:layout_width="match_parent"
+        android:layout_height="241dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_launcher_background"
+        app:civ_border_color="@color/black"
+        app:civ_border_width="2dp"
+
+        />
 
     <ImageView
         android:id="@+id/imv_PlayAndPause"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="50mm"
+        android:layout_marginTop="50dp"
         android:src="@drawable/ic_play"
 
         />
