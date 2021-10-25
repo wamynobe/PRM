@@ -52,6 +52,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
         init();
         //set up animator for music CD on activity
         animatorSetup();
+
         mediaPlayer = new MediaPlayer();
 
         sb_playseekbar.setMax(100);
@@ -64,7 +65,6 @@ public class MusicPlayerActivity extends AppCompatActivity {
                     handler.removeCallbacks(updater);
                     mediaPlayer.pause();
                     imv_playandpause.setImageResource(R.drawable.ic_play);
-
 
                 }else{
                     objectAnimator.resume();
@@ -92,6 +92,8 @@ public class MusicPlayerActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+
         mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
             @Override
             public void onBufferingUpdate(MediaPlayer mediaPlayer, int i) {
@@ -99,6 +101,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
             }
         });
+
 
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override

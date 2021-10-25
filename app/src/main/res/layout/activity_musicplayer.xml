@@ -7,7 +7,15 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".MainActivity"
+    android:background="#bd34eb"
     >
+    <ImageView
+        android:id="@+id/imv_back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="left"
+        android:src="@drawable/ic_back"
+        />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imvc_dianhac"
@@ -25,13 +33,33 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="50dp"
+        android:layout_gravity="center_horizontal"
         android:src="@drawable/ic_play"
 
         />
+    <ImageView
+        android:id="@+id/imv_previous"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="left"
+        android:layout_marginTop="-50dp"
+        android:layout_marginLeft="50dp"
+        android:src="@drawable/ic_previous"/>
+    <ImageView
+        android:id="@+id/imv_next"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="-50dp"
+        android:layout_marginRight="50dp"
+        android:src="@drawable/ic_next"/>
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
