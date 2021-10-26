@@ -1,8 +1,10 @@
-package com.example.prmmusic;
+package com.example.prmmusic.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.prmmusic.R;
 
 public class MainActivity extends AppCompatActivity {
 

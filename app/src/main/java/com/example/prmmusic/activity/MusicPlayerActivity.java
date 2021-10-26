@@ -1,4 +1,4 @@
-package com.example.prmmusic;
+package com.example.prmmusic.activity;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.prmmusic.R;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
