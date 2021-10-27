@@ -1,6 +1,8 @@
 package com.example.prmmusic.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,15 +15,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.prmmusic.R;
+import com.example.prmmusic.activity.PlayListSong;
 import com.example.prmmusic.model.Playlist;
 
 import java.util.List;
 
-public class RecycleDataAdapter extends RecyclerView.Adapter<RecycleDataAdapter.MyViewHolder> {
+public class RecyclePlayListAdapter extends RecyclerView.Adapter<RecyclePlayListAdapter.MyViewHolder> {
     private List<Playlist> playlists;
     private Context context;
 
-    public RecycleDataAdapter(Context context, List<Playlist> playlists) {
+    public RecyclePlayListAdapter(Context context, List<Playlist> playlists) {
         this.context = context;
         this.playlists = playlists;
         Log.d("contructor inside", "RecycleDataAdapter: ");
@@ -36,18 +39,33 @@ public class RecycleDataAdapter extends RecyclerView.Adapter<RecycleDataAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecycleDataAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclePlayListAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Glide.with(context).load(playlists.get(position).getImageIcon()).into(holder.imv_image);
         holder.tv_name.setText(playlists.get(position).getName());
         holder.tv_description.setText("description");
-        Log.d("inBind", "onBindViewHolder: xxxxxxxxxxxxx");
+        holder.imv_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context, PlayListSong.class);
+                i.putExtra("playlist", playlists.get(position));
+                context.startActivity(i);
+            }
+        });
+        holder.tv_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context, PlayListSong.class);
+                i.putExtra("playlist", playlists.get(position));
+                context.startActivity(i);
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
         return playlists.size();
     }
-
 
 
 
