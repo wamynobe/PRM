@@ -10,4 +10,6 @@ import retrofit2.http.GET;
 public interface DataService {
     @GET("playlist.php")
     Call<List<Playlist>> getDataPlayList();
+
+
 }

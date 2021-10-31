@@ -17,7 +17,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.prmmusic.R;
+import com.example.prmmusic.model.Song;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -29,6 +33,12 @@ public class MusicPlayerActivity extends AppCompatActivity {
     private SeekBar sb_playseekbar;
     private MediaPlayer mediaPlayer;
     private Handler handler = new Handler();
+    String urlSong = "";
+    String urlImg = "";
+
+    public static List<Song> listSongs = new ArrayList<>();
+
+
     public void animatorSetup(){
         objectAnimator = ObjectAnimator.ofFloat(imvc_dianhac, "rotation", 0f, 360f);
         objectAnimator.setDuration(10000);
@@ -44,6 +54,8 @@ public class MusicPlayerActivity extends AppCompatActivity {
         tv_totalduration = findViewById(R.id.tv_totalduration);
         sb_playseekbar = findViewById(R.id.sb_playseekbar);
         imvc_dianhac = findViewById(R.id.imvc_dianhac);
+
+
     }
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
@@ -61,26 +73,28 @@ public class MusicPlayerActivity extends AppCompatActivity {
         imv_playandpause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mediaPlayer.isPlaying()){
-                    objectAnimator.pause();
-                    handler.removeCallbacks(updater);
-                    mediaPlayer.pause();
-                    imv_playandpause.setImageResource(R.drawable.ic_play);
+                if(listSongs.size()>0){
+                    if(mediaPlayer.isPlaying()){
+                        objectAnimator.pause();
+                        handler.removeCallbacks(updater);
+                        mediaPlayer.pause();
+                        imv_playandpause.setImageResource(R.drawable.ic_play);
+                    }else{
+                        objectAnimator.resume();
+                        mediaPlayer.start();
+                        imv_playandpause.setImageResource(R.drawable.ic_pause);
+                        updateSeekBar();
 
-                }else{
-                    objectAnimator.resume();
-                    mediaPlayer.start();
-                    imv_playandpause.setImageResource(R.drawable.ic_pause);
-                    updateSeekBar();
-
+                    }
+                    urlSong = listSongs.get(0).getLink();
+                    urlImg = listSongs.get(0).getImage();
+                    updateImgDiaNhac(urlImg);
+                    prepareMediaPlayer(urlSong);
                 }
             }
         });
 
-        String urlSong = "https://firebasestorage.googleapis.com/v0/b/prmmusiclistener.appspot.com/o/Music%2Ftest.mp3?alt=media&token=60a18dc9-25f4-4c33-8193-a895a8940f67";
-        String urlImg = "https://yt3.ggpht.com/Vn34V_RSZY7jBw3UzivU_93m35T-___z2ZSDkV2I41Z30RnQqGhtQ0O8RCeNzHtRY1GTRbl-aiE=s48-c-k-c0x00ffffff-no-rj";
-        updateImgDiaNhac(urlImg);
-        prepareMediaPlayer(urlSong);
+
 
 
         sb_playseekbar.setOnTouchListener(new View.OnTouchListener(){
