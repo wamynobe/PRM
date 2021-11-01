@@ -20,6 +20,17 @@ public class Playlist implements Serializable {
     @Expose
     private String name;
 
+
+    public Playlist() {
+    }
+
+    public Playlist(String id, String imageBackgroud, String imageIcon, String name) {
+        this.id = id;
+        this.imageBackgroud = imageBackgroud;
+        this.imageIcon = imageIcon;
+        this.name = name;
+    }
+
     public String getId() {
         return id;
     }

@@ -1,4 +1,4 @@
-package com.example.prmmusic.service;
+package com.example.prmmusic.interfaces;
 
 import com.example.prmmusic.model.Playlist;
 

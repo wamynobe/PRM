@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.prmmusic.R;
+import com.example.prmmusic.interfaces.PassDataInterface;
 import com.example.prmmusic.model.Song;
 import com.squareup.picasso.Picasso;
 
@@ -25,7 +26,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MusicPlayerActivity extends AppCompatActivity {
+public class MusicPlayerActivity extends AppCompatActivity implements PassDataInterface {
     private ObjectAnimator objectAnimator;
     private CircleImageView imvc_dianhac;
     private ImageView imv_playandpause;
@@ -35,10 +36,22 @@ public class MusicPlayerActivity extends AppCompatActivity {
     private Handler handler = new Handler();
     String urlSong = "";
     String urlImg = "";
+    int currentSongPosition = 0;
 
     public static List<Song> listSongs = new ArrayList<>();
 
 
+    public void setCurrentSongPosition(int p){
+        this.currentSongPosition = p;
+    }
+    public void setListSongs(List<Song> listSongs){
+        this.listSongs = listSongs;
+    }
+    public void setSampleData(){
+        Song song = new Song(1,"1","https://i.ytimg.com/vi/Z25VTNjwBm0/hqdefault.jpg",0,"https://firebasestorage.googleapis.com/v0/b/prmmusiclistener.appspot.com/o/Music%2Fbonfire.mp3?alt=media&token=7fef7eea-23af-4fca-886a-b24a61112f02","Bonfire","0","Various","0");
+        listSongs.add(song);
+
+    }
     public void animatorSetup(){
         objectAnimator = ObjectAnimator.ofFloat(imvc_dianhac, "rotation", 0f, 360f);
         objectAnimator.setDuration(10000);
@@ -46,15 +59,26 @@ public class MusicPlayerActivity extends AppCompatActivity {
         objectAnimator.setRepeatMode(ValueAnimator.RESTART);
         objectAnimator.setInterpolator(new LinearInterpolator());
         objectAnimator.start();
-        objectAnimator.pause();
     }
     public void init(){
+        setSampleData();
         imv_playandpause = findViewById(R.id.imv_PlayAndPause);
         tv_currenttime = findViewById(R.id.tv_currentime);
         tv_totalduration = findViewById(R.id.tv_totalduration);
         sb_playseekbar = findViewById(R.id.sb_playseekbar);
         imvc_dianhac = findViewById(R.id.imvc_dianhac);
 
+
+    }
+    public void playFirstSong(){
+
+        urlSong = listSongs.get(0).getLink();
+        urlImg = listSongs.get(0).getImage();
+        updateImgDiaNhac(urlImg);
+        prepareMediaPlayer(urlSong);
+        mediaPlayer.start();
+        imv_playandpause.setImageResource(R.drawable.ic_pause);
+        updateSeekBar();
 
     }
     @Override
@@ -67,13 +91,11 @@ public class MusicPlayerActivity extends AppCompatActivity {
         animatorSetup();
 
         mediaPlayer = new MediaPlayer();
-
         sb_playseekbar.setMax(100);
-
+        playFirstSong();
         imv_playandpause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(listSongs.size()>0){
                     if(mediaPlayer.isPlaying()){
                         objectAnimator.pause();
                         handler.removeCallbacks(updater);
@@ -86,11 +108,6 @@ public class MusicPlayerActivity extends AppCompatActivity {
                         updateSeekBar();
 
                     }
-                    urlSong = listSongs.get(0).getLink();
-                    urlImg = listSongs.get(0).getImage();
-                    updateImgDiaNhac(urlImg);
-                    prepareMediaPlayer(urlSong);
-                }
             }
         });
 
@@ -178,5 +195,10 @@ public class MusicPlayerActivity extends AppCompatActivity {
     }
     public void updateImgDiaNhac(String imageUrl) {
         Picasso.get().load(imageUrl).into(imvc_dianhac);
+    }
+
+    @Override
+    public void onReceivedListSongs(List<Song> listSongs) {
+
     }
 }

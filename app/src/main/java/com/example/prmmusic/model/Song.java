@@ -7,7 +7,7 @@ public class Song {
 
     @SerializedName("id")
     @Expose
-    private String id;
+    private int id;
     @SerializedName("albumID")
     @Expose
     private String albumID;
@@ -16,7 +16,7 @@ public class Song {
     private String image;
     @SerializedName("like")
     @Expose
-    private String like;
+    private int like;
     @SerializedName("link")
     @Expose
     private String link;
@@ -33,11 +33,26 @@ public class Song {
     @Expose
     private String typeID;
 
-    public String getId() {
+    public Song(int id, String albumID, String image, int like, String link, String name, String playlistID, String singer, String typeID) {
+        this.id = id;
+        this.albumID = albumID;
+        this.image = image;
+        this.like = like;
+        this.link = link;
+        this.name = name;
+        this.playlistID = playlistID;
+        this.singer = singer;
+        this.typeID = typeID;
+    }
+
+    public Song() {
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -57,11 +72,11 @@ public class Song {
         this.image = image;
     }
 
-    public String getLike() {
+    public int getLike() {
         return like;
     }
 
-    public void setLike(String like) {
+    public void setLike(int like) {
         this.like = like;
     }
 

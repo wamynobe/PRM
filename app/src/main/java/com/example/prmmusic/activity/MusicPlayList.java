@@ -13,7 +13,7 @@
 //import com.example.prmmusic.adapter.RecyclePlayListAdapter;
 //import com.example.prmmusic.model.Playlist;
 //import com.example.prmmusic.service.APIService;
-//import com.example.prmmusic.service.DataService;
+//import com.example.prmmusic.interfaces.DataService;
 //
 //import java.util.ArrayList;
 //import java.util.List;
