@@ -11,9 +11,10 @@ import android.widget.TextView;
 
 import com.example.prmmusic.R;
 import com.example.prmmusic.adapter.RecyclePlayListAdapter;
+import com.example.prmmusic.model.Album;
 import com.example.prmmusic.model.Playlist;
 import com.example.prmmusic.service.APIService;
-import com.example.prmmusic.interfaces.DataService;
+import com.example.prmmusic.service.DataService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,7 @@ public class MusicPlayList extends AppCompatActivity {
         imv_playlistimg = findViewById(R.id.imv_playlistimage);
         tv_playlistname = findViewById(R.id.tv_playlistname);
         getDataPlayList();
+        getAllAlbum();
 
     }
 
@@ -44,12 +46,25 @@ public class MusicPlayList extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Playlist>> call, Response<List<Playlist>> response) {
                 playlists = (ArrayList<Playlist>) response.body();
-                RecyclePlayListAdapter adapter = new RecyclePlayListAdapter(MusicPlayList.this, playlists);
-                rcview.setLayoutManager(new LinearLayoutManager(MusicPlayList.this));
-                rcview.setAdapter(adapter);
+                Log.d("listdata", "onResponse: " + playlists.get(0).getName());
             }
             @Override
             public void onFailure(Call<List<Playlist>> call, Throwable t) {
+                Log.d("fail", "fail to load data");
+            }
+        });
+    }
+    public void getAllAlbum(){
+        DataService dataService = APIService.getService();
+        Call<List<Album>> callBack = dataService.getAllAlbums();
+        callBack.enqueue(new Callback<List<Album>>() {
+            @Override
+            public void onResponse(Call<List<Album>> call, Response<List<Album>> response) {
+                List<Album> playlistal = (ArrayList<Album>) response.body();
+                Log.d("listdata", "onResponse: " + playlistal.get(0).getName());
+            }
+            @Override
+            public void onFailure(Call<List<Album>> call, Throwable t) {
                 Log.d("fail", "fail to load data");
             }
         });
