@@ -20,10 +20,13 @@ public class RecyclerPlaylistOverviewAdapter extends RecyclerView.Adapter<Recycl
 
     private final Context context;
     private final List<Playlist> playlists;
+    private final OnItemClickListener listener;
 
-    public RecyclerPlaylistOverviewAdapter(Context context, List<Playlist> playlists) {
+    public RecyclerPlaylistOverviewAdapter(Context context, List<Playlist> playlists,
+            OnItemClickListener listener) {
         this.context = context;
         this.playlists = playlists;
+        this.listener = listener;
     }
 
     @NonNull
@@ -40,6 +43,7 @@ public class RecyclerPlaylistOverviewAdapter extends RecyclerView.Adapter<Recycl
         picasso.load(playlist.getImageBackgroud()).into(holder.playlistBackground);
         picasso.load(playlist.getImageIcon()).into(holder.playlistIcon);
         holder.playlistName.setText(playlist.getName());
+        holder.itemView.setOnClickListener(v -> listener.onItemClick(playlist.getId()));
     }
 
     @Override
@@ -59,5 +63,9 @@ public class RecyclerPlaylistOverviewAdapter extends RecyclerView.Adapter<Recycl
             playlistIcon = itemView.findViewById(R.id.image_view_playlist_icon);
             playlistName = itemView.findViewById(R.id.text_view_playlist_name);
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(String playlistId);
     }
 }
