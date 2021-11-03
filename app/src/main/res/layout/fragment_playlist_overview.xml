@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="8dp">
+
+    <TextView
+        android:id="@+id/text_view_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/fragment_playlist_overview_title"
+        android:textAlignment="center"
+        android:textColor="#3e3b3b"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_playlist_overview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/text_view_title"
+        tools:listitem="@layout/playlist_overview_item" />
+
+    <TextView
+        android:id="@+id/text_view_more_playlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="#c9c7c7"
+        android:drawablePadding="8dp"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="8dp"
+        android:text="@string/fragment_playlist_overview_more_playlist_title"
+        android:textColor="#0a0a0a"
+        android:textSize="19sp"
+        app:drawableStartCompat="@drawable/ic_more_playlist"
+        app:layout_constraintTop_toBottomOf="@id/recycler_view_playlist_overview" />
+</androidx.constraintlayout.widget.ConstraintLayout>

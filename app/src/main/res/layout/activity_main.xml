@@ -8,7 +8,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <fragment
             android:id="@+id/fragment_trending"
@@ -16,5 +17,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout="@layout/fragment_trending" />
+
+        <fragment
+            android:id="@+id/fragment_playlist_overview"
+            android:name="com.example.prmmusic.fragment.PlaylistOverviewFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/fragment_playlist_overview" />
     </LinearLayout>
 </ScrollView>
