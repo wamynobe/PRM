@@ -1,7 +1,9 @@
 package com.example.prmmusic.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +15,14 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.prmmusic.R;
+import com.example.prmmusic.activity.MusicPlayerActivity;
 import com.example.prmmusic.adapter.RecyclerTrendingAdapter;
+import com.example.prmmusic.model.Song;
 import com.example.prmmusic.model.Trending;
 import com.example.prmmusic.service.APIService;
 import com.example.prmmusic.service.DataService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator;
@@ -25,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TrendingFragment extends Fragment {
+public class TrendingFragment extends Fragment implements RecyclerTrendingAdapter.OnItemClickListener {
 
     private int currentItem;
 
@@ -48,7 +53,7 @@ public class TrendingFragment extends Fragment {
             public void onResponse(@NonNull Call<List<Trending>> call,
                     @NonNull Response<List<Trending>> response) {
                 RecyclerTrendingAdapter adapter = new RecyclerTrendingAdapter(getContext(),
-                        response.body());
+                        response.body(), TrendingFragment.this);
                 viewPager.setAdapter(adapter);
                 indicator.setViewPager(viewPager);
                 Handler handler = new Handler();
@@ -68,6 +73,27 @@ public class TrendingFragment extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call<List<Trending>> call, @NonNull Throwable t) {
+                Log.d("fail", "fail to load data");
+            }
+        });
+    }
+
+    @Override
+    public void onItemClick(@NonNull String trendingId) {
+        DataService dataService = APIService.getService();
+        Call<List<Song>> callBack = dataService.getSongsFromTrending(trendingId);
+        callBack.enqueue(new Callback<List<Song>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Song>> call,
+                    @NonNull Response<List<Song>> response) {
+                Intent intent = new Intent(getContext(), MusicPlayerActivity.class);
+                intent.putParcelableArrayListExtra("songs",
+                        (ArrayList<? extends Parcelable>) response.body());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Song>> call, @NonNull Throwable t) {
                 Log.d("fail", "fail to load data");
             }
         });

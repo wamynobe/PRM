@@ -1,9 +1,12 @@
 package com.example.prmmusic.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Song {
+public class Song implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -120,4 +123,46 @@ public class Song {
         this.typeID = typeID;
     }
 
+    public Song(Parcel parcel) {
+        id = parcel.readInt();
+        albumID = parcel.readString();
+        image = parcel.readString();
+        like = parcel.readInt();
+        link = parcel.readString();
+        name = parcel.readString();
+        playlistID = parcel.readString();
+        singer = parcel.readString();
+        typeID = parcel.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(albumID);
+        dest.writeString(image);
+        dest.writeInt(like);
+        dest.writeString(link);
+        dest.writeString(name);
+        dest.writeString(playlistID);
+        dest.writeString(singer);
+        dest.writeString(typeID);
+    }
+
+    public static Creator<Song> CREATOR = new Creator<Song>() {
+
+        @Override
+        public Song createFromParcel(Parcel source) {
+            return new Song(source);
+        }
+
+        @Override
+        public Song[] newArray(int size) {
+            return new Song[size];
+        }
+    };
 }

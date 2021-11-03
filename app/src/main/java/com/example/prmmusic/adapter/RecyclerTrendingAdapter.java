@@ -20,10 +20,13 @@ public class RecyclerTrendingAdapter extends PagerAdapter {
 
     private final Context context;
     private final List<Trending> trendingList;
+    private final OnItemClickListener listener;
 
-    public RecyclerTrendingAdapter(Context context, List<Trending> trendingList) {
+    public RecyclerTrendingAdapter(Context context, List<Trending> trendingList,
+            OnItemClickListener listener) {
         this.context = context;
         this.trendingList = trendingList;
+        this.listener = listener;
     }
 
     @Override
@@ -52,11 +55,16 @@ public class RecyclerTrendingAdapter extends PagerAdapter {
         textViewSongName.setText(trending.getSongName());
         textViewContent.setText(trending.getContent());
         container.addView(view);
+        view.setOnClickListener(v -> listener.onItemClick(trending.getId()));
         return view;
     }
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View) object);
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(String trendingId);
     }
 }
