@@ -4,6 +4,7 @@ import com.example.prmmusic.model.Album;
 import com.example.prmmusic.model.Playlist;
 import com.example.prmmusic.model.Song;
 import com.example.prmmusic.model.Topic;
+import com.example.prmmusic.model.TopicAndType;
 import com.example.prmmusic.model.Trending;
 import com.example.prmmusic.model.Type;
 

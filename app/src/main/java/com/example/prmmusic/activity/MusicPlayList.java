@@ -13,6 +13,7 @@ import com.example.prmmusic.R;
 import com.example.prmmusic.adapter.RecyclePlayListAdapter;
 import com.example.prmmusic.model.Album;
 import com.example.prmmusic.model.Playlist;
+import com.example.prmmusic.model.Song;
 import com.example.prmmusic.service.APIService;
 import com.example.prmmusic.service.DataService;
 
@@ -56,15 +57,15 @@ public class MusicPlayList extends AppCompatActivity {
     }
     public void getAllAlbum(){
         DataService dataService = APIService.getService();
-        Call<List<Album>> callBack = dataService.getAllAlbums();
-        callBack.enqueue(new Callback<List<Album>>() {
+        Call<List<Song>> callBack = dataService.getSongsFromAlbum("1");
+        callBack.enqueue(new Callback<List<Song>>() {
             @Override
-            public void onResponse(Call<List<Album>> call, Response<List<Album>> response) {
-                List<Album> playlistal = (ArrayList<Album>) response.body();
+            public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
+                List<Song> playlistal = (ArrayList<Song>) response.body();
                 Log.d("listdata", "onResponse: " + playlistal.get(0).getName());
             }
             @Override
-            public void onFailure(Call<List<Album>> call, Throwable t) {
+            public void onFailure(Call<List<Song>> call, Throwable t) {
                 Log.d("fail", "fail to load data");
             }
         });
