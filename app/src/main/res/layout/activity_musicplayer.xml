@@ -43,17 +43,35 @@
         android:layout_height="50dp"
         android:layout_gravity="left"
         android:layout_marginTop="-50dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="20dp"
         android:src="@drawable/ic_previous"/>
+    <ImageView
+        android:id="@+id/imv_shuffle"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="left"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="-50dp"
+        android:src="@drawable/ic_shuffle"/>
+
     <ImageView
         android:id="@+id/imv_next"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="right"
         android:layout_marginTop="-50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="20dp"
         android:src="@drawable/ic_next"/>
 
+    <ImageView
+        android:id="@+id/imv_repeat"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="70dp"
+        android:layout_marginTop="-50dp"
+        android:src="@drawable/ic_repeat"
+        />
 
 
     <LinearLayout

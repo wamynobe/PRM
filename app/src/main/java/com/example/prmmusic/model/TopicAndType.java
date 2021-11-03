@@ -1,4 +1,4 @@
-package com.example.prmmusic.service;
+package com.example.prmmusic.model;
 
 import com.example.prmmusic.model.Topic;
 import com.example.prmmusic.model.Type;

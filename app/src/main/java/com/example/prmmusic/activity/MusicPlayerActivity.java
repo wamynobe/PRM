@@ -2,6 +2,9 @@ package com.example.prmmusic.activity;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.LightingColorFilter;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,22 +26,25 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MusicPlayerActivity extends AppCompatActivity implements PassDataInterface {
     private ObjectAnimator objectAnimator;
     private CircleImageView imvc_dianhac;
-    private ImageView imv_playandpause, imv_next, imv_previous, imv_back;
+    private ImageView imv_playandpause, imv_next, imv_previous, imv_back, imv_repeat, imv_shuffle;
     private TextView tv_currenttime, tv_totalduration;
     private SeekBar sb_playseekbar;
-    private MediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayer = new MediaPlayer();;
     private Handler handler = new Handler();
     String urlSong = "";
     String urlImg = "";
-    int currentSongPosition = 0;
-
+    public int currentSongPosition = 0;
+    boolean isRepeat = false;
+    boolean isShuffle = false;
     public static List<Song> listSongs = new ArrayList<>();
+    private int numSong = 0;
 
 
     public void setCurrentSongPosition(int p){
@@ -76,11 +82,12 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
         imv_next = findViewById(R.id.imv_next);
         imv_previous = findViewById(R.id.imv_previous);
         imv_back = findViewById(R.id.imv_back);
+        imv_repeat = findViewById(R.id.imv_repeat);
+        imv_shuffle = findViewById(R.id.imv_shuffle);
 
 
     }
     public void playSong(int index){
-        mediaPlayer = new MediaPlayer();
         sb_playseekbar.setMax(100);
         urlSong = listSongs.get(index).getLink();
         urlImg = listSongs.get(index).getImage();
@@ -89,7 +96,6 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
         mediaPlayer.start();
         imv_playandpause.setImageResource(R.drawable.ic_pause);
         updateSeekBar();
-
     }
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
@@ -125,13 +131,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
             @Override
             public void onClick(View view) {
                 if(currentSongPosition > 0 && currentSongPosition < listSongs.size()){
-                    if(mediaPlayer != null){
-                        if(mediaPlayer.isPlaying()){
-                            mediaPlayer.stop();
-                        }
-                        mediaPlayer.release();
-                        mediaPlayer = null;
-                    }
+                    mediaPlayer.reset();
                     currentSongPosition = currentSongPosition - 1;
                     playSong(currentSongPosition);
                 }
@@ -142,13 +142,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
             @Override
             public void onClick(View view) {
                 if(currentSongPosition >= 0 && currentSongPosition < listSongs.size()-1){
-                    if(mediaPlayer != null){
-                        if(mediaPlayer.isPlaying()){
-                            mediaPlayer.stop();
-                        }
-                        mediaPlayer.release();
-                        mediaPlayer = null;
-                    }
+                    mediaPlayer.reset();
                     currentSongPosition = currentSongPosition + 1;
                     playSong(currentSongPosition);
                 }
@@ -159,8 +153,39 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
             @Override
             public void onClick(View view) {
                 //back to previous activity
+                finish();
             }
         });
+
+        imv_shuffle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!isShuffle){
+                    isShuffle = true;
+                    ColorFilter filter = new LightingColorFilter( Color.BLACK, Color.BLACK);
+                    imv_shuffle.setColorFilter(filter);
+                }else{
+                    isShuffle = false;
+                    imv_shuffle.clearColorFilter();
+                }
+            }
+        });
+
+        imv_repeat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!isRepeat){
+                    isRepeat = true;
+                    ColorFilter filter = new LightingColorFilter( Color.BLACK, Color.BLACK);
+                    imv_repeat.setColorFilter(filter);
+                }else{
+                    isRepeat = false;
+                    imv_repeat.clearColorFilter();
+                }
+            }
+        });
+
+
 
 
 
@@ -194,7 +219,33 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
                 tv_currenttime.setText(R.string.zero);
                 tv_totalduration.setText(R.string.zero);
                 mediaPlayer.reset();
-                prepareMediaPlayer(urlSong);
+                if (isShuffle) {
+                    if (isRepeat) {
+                        if(numSong < 1 ) {
+                            playSong(currentSongPosition);
+                            numSong = numSong + 1;
+                        }else{
+                            currentSongPosition = getRandomIndex();
+                            playSong(currentSongPosition);
+                        }
+                    } else {
+                        currentSongPosition = getRandomIndex();
+                        playSong(currentSongPosition);
+                    }
+                }else{
+                    if (isRepeat) {
+                        playSong(currentSongPosition);
+                    } else {
+                        if (currentSongPosition >= 0 && currentSongPosition < listSongs.size() - 1) {
+                            playSong(currentSongPosition + 1);
+                            currentSongPosition += 1;
+                        }
+                        if (currentSongPosition == listSongs.size() - 1) {
+                            currentSongPosition = 0;
+                        }
+                    }
+                }
+
             }
         });
 
@@ -202,6 +253,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
 
     private void prepareMediaPlayer(String url){
         try {
+
             mediaPlayer.setDataSource(url);
             mediaPlayer.prepare();
             tv_totalduration.setText(milliSecondsToTimer(mediaPlayer.getDuration()));
@@ -216,6 +268,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
             updateSeekBar();
             long currentDuration = mediaPlayer.getCurrentPosition();
             tv_currenttime.setText(milliSecondsToTimer(currentDuration));
+
         }
     };
 
@@ -246,6 +299,12 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
     }
     public void updateImgDiaNhac(String imageUrl) {
         Picasso.get().load(imageUrl).into(imvc_dianhac);
+    }
+
+    public int getRandomIndex(){
+        Random rand = new Random();
+        int n = rand.nextInt(listSongs.size());
+        return n;
     }
 
     @Override
