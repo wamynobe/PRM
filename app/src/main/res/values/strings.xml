@@ -5,4 +5,7 @@
 
     <string name="fragment_playlist_overview_title">NHỊP ĐIỆU CẢM XÚC</string>
     <string name="fragment_playlist_overview_more_playlist_title">Xem thêm playlist</string>
+
+    <string name="fragment_topic_overview_title">CHỦ ĐỀ VÀ THỂ LOẠI</string>
+    <string name="fragment_topic_overview_more_topic_title">Xem Thêm</string>
 </resources>

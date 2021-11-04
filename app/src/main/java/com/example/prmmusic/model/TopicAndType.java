@@ -8,12 +8,12 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class TopicAndType {
-    @SerializedName("Genres")
+    @SerializedName("type")
     @Expose
     private List<Type> genres = null;
 
     //JSON name mapper
-    @SerializedName("Topics")
+    @SerializedName("topic")
     @Expose
     private List<Topic> topics = null;
 

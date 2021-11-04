@@ -10,7 +10,7 @@ public class Type {
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("image")
+    @SerializedName("imageBackgroud")
     @Expose
     private String image;
     @SerializedName("topicID")
