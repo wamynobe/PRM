@@ -55,7 +55,7 @@ public class RecyclerTrendingAdapter extends PagerAdapter {
         textViewSongName.setText(trending.getSongName());
         textViewContent.setText(trending.getContent());
         container.addView(view);
-        view.setOnClickListener(v -> listener.onItemClick(trending.getId()));
+        view.setOnClickListener(v -> listener.onItemClick(trending));
         return view;
     }
 
@@ -65,6 +65,6 @@ public class RecyclerTrendingAdapter extends PagerAdapter {
     }
 
     public interface OnItemClickListener {
-        void onItemClick(String trendingId);
+        void onItemClick(Trending trending);
     }
 }

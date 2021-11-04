@@ -15,8 +15,9 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.prmmusic.R;
-import com.example.prmmusic.activity.MusicPlayerActivity;
+import com.example.prmmusic.activity.PlaylistActivity;
 import com.example.prmmusic.adapter.RecyclerTrendingAdapter;
+import com.example.prmmusic.model.Playlist;
 import com.example.prmmusic.model.Song;
 import com.example.prmmusic.model.Trending;
 import com.example.prmmusic.service.APIService;
@@ -79,14 +80,17 @@ public class TrendingFragment extends Fragment implements RecyclerTrendingAdapte
     }
 
     @Override
-    public void onItemClick(@NonNull String trendingId) {
+    public void onItemClick(@NonNull Trending trending) {
         DataService dataService = APIService.getService();
-        Call<List<Song>> callBack = dataService.getSongsFromTrending(trendingId);
+        Call<List<Song>> callBack = dataService.getSongsFromTrending(trending.getId());
         callBack.enqueue(new Callback<List<Song>>() {
             @Override
             public void onResponse(@NonNull Call<List<Song>> call,
                     @NonNull Response<List<Song>> response) {
-                Intent intent = new Intent(getContext(), MusicPlayerActivity.class);
+                Playlist playlist = new Playlist(trending.getId(), trending.getImage(),
+                        trending.getSongImage(), trending.getSongName());
+                Intent intent = new Intent(getContext(), PlaylistActivity.class);
+                intent.putExtra("playlist", playlist);
                 intent.putParcelableArrayListExtra("songs",
                         (ArrayList<? extends Parcelable>) response.body());
                 startActivity(intent);
