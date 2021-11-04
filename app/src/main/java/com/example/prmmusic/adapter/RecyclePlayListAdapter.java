@@ -46,17 +46,11 @@ public class RecyclePlayListAdapter extends RecyclerView.Adapter<RecyclePlayList
         holder.imv_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, PlayListSong.class);
-                i.putExtra("playlist", playlists.get(position));
-                context.startActivity(i);
             }
         });
         holder.tv_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, PlayListSong.class);
-                i.putExtra("playlist", playlists.get(position));
-                context.startActivity(i);
             }
         });
 
