@@ -8,4 +8,7 @@
 
     <string name="fragment_topic_overview_title">CHỦ ĐỀ VÀ THỂ LOẠI</string>
     <string name="fragment_topic_overview_more_topic_title">Xem Thêm</string>
+
+    <string name="fragment_album_overview_title">ALBUM HOT</string>
+    <string name="fragment_album_overview_more_album_title">Xem Thêm</string>
 </resources>

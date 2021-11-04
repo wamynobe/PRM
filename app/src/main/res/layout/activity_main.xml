@@ -31,5 +31,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout="@layout/fragment_topic_overview" />
+
+        <fragment
+            android:id="@+id/fragment_album_overview"
+            android:name="com.example.prmmusic.fragment.AlbumOverviewFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/fragment_album_overview" />
     </LinearLayout>
 </ScrollView>
