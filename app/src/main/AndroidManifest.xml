@@ -39,6 +39,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="true">
         </activity>
+        <service android:name=".service.PlayerService"/>
     </application>
 
 </manifest>

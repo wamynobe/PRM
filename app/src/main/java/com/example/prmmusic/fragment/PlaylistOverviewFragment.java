@@ -1,6 +1,7 @@
 package com.example.prmmusic.fragment;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -29,7 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PlaylistOverviewFragment extends Fragment implements RecyclerPlaylistOverviewAdapter.OnItemClickListener {
-
+    private static MediaPlayer player;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -59,6 +60,10 @@ public class PlaylistOverviewFragment extends Fragment implements RecyclerPlayli
         });
     }
 
+    public static void setPlayer(MediaPlayer player) {
+        PlaylistOverviewFragment.player = player;
+    }
+
     @Override
     public void onItemClick(String playlistId) {
         DataService dataService = APIService.getService();
@@ -67,10 +72,16 @@ public class PlaylistOverviewFragment extends Fragment implements RecyclerPlayli
             @Override
             public void onResponse(@NonNull Call<List<Song>> call,
                     @NonNull Response<List<Song>> response) {
+                if(player != null){
+                    player.stop();
+                    player.release();
+                    Log.d("release", "onResponse: release");
+                }
                 Intent intent = new Intent(getContext(), MusicPlayerActivity.class);
                 intent.putParcelableArrayListExtra("songs",
                         (ArrayList<? extends Parcelable>) response.body());
                 startActivity(intent);
+
             }
 
             @Override

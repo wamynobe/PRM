@@ -2,6 +2,7 @@ package com.example.prmmusic.activity;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.LightingColorFilter;
@@ -20,8 +21,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.prmmusic.R;
+import com.example.prmmusic.fragment.PlaylistOverviewFragment;
 import com.example.prmmusic.interfaces.PassDataInterface;
 import com.example.prmmusic.model.Song;
+import com.example.prmmusic.service.PlayerService;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -45,6 +48,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
     boolean isShuffle = false;
     public static List<Song> listSongs = new ArrayList<>();
     private int numSong = 0;
+
 
 
     public void setCurrentSongPosition(int p){
@@ -87,6 +91,10 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
 
 
     }
+
+
+
+
     public void playSong(int index){
         sb_playseekbar.setMax(100);
         urlSong = listSongs.get(index).getLink();
@@ -97,6 +105,12 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
         imv_playandpause.setImageResource(R.drawable.ic_pause);
         updateSeekBar();
     }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -105,19 +119,21 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
         init();
         //set up animator for music CD on activity
         animatorSetup();
-
-
+        PlaylistOverviewFragment.setPlayer(mediaPlayer);
         playSong(0);
         currentSongPosition = 0;
         imv_playandpause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                     if(mediaPlayer.isPlaying()){
+                        //stopService();
                         objectAnimator.pause();
                         handler.removeCallbacks(updater);
                         mediaPlayer.pause();
                         imv_playandpause.setImageResource(R.drawable.ic_play);
+
                     }else{
+                        //startService(new Intent(MusicPlayerActivity.this,PlayerService.class));
                         objectAnimator.resume();
                         mediaPlayer.start();
                         imv_playandpause.setImageResource(R.drawable.ic_pause);
@@ -130,10 +146,34 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
         imv_previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(currentSongPosition > 0 && currentSongPosition < listSongs.size()){
+                if(currentSongPosition >= 0 && currentSongPosition < listSongs.size()-1){
                     mediaPlayer.reset();
-                    currentSongPosition = currentSongPosition - 1;
-                    playSong(currentSongPosition);
+                    if (isShuffle) {
+                        if (isRepeat) {
+                            if(numSong < 1 ) {
+                                playSong(currentSongPosition);
+                                numSong = numSong + 1;
+                            }else{
+                                currentSongPosition = getRandomIndex();
+                                playSong(currentSongPosition);
+                            }
+                        } else {
+                            currentSongPosition = getRandomIndex();
+                            playSong(currentSongPosition);
+                        }
+                    }else{
+                        if (isRepeat) {
+                            playSong(currentSongPosition);
+                        } else {
+                            if (currentSongPosition == 0) {
+                                currentSongPosition = listSongs.size() - 1;
+                                playSong(currentSongPosition);
+                            } else {
+                                playSong(currentSongPosition - 1);
+                                currentSongPosition -= 1;
+                            }
+                        }
+                    }
                 }
             }
         });
@@ -141,11 +181,36 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
         imv_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(currentSongPosition >= 0 && currentSongPosition < listSongs.size()-1){
+                if(currentSongPosition >= 0 && currentSongPosition < listSongs.size()){
                     mediaPlayer.reset();
-                    currentSongPosition = currentSongPosition + 1;
-                    playSong(currentSongPosition);
+                    if (isShuffle) {
+                        if (isRepeat) {
+                            if(numSong < 1 ) {
+                                playSong(currentSongPosition);
+                                numSong = numSong + 1;
+                            }else{
+                                currentSongPosition = getRandomIndex();
+                                playSong(currentSongPosition);
+                            }
+                        } else {
+                            currentSongPosition = getRandomIndex();
+                            playSong(currentSongPosition);
+                        }
+                    }else{
+                        if (isRepeat) {
+                            playSong(currentSongPosition);
+                        } else {
+                            if (currentSongPosition == listSongs.size() - 1) {
+                                currentSongPosition = 0;
+                                playSong(currentSongPosition);
+                            }else{
+                                playSong(currentSongPosition + 1);
+                                currentSongPosition += 1;
+                            }
+                        }
+                    }
                 }
+
             }
         });
 
@@ -153,7 +218,11 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
             @Override
             public void onClick(View view) {
                 //back to previous activity
+
+                handler.removeCallbacks(updater);
                 finish();
+
+                //onBackPressed();
             }
         });
 
@@ -273,10 +342,13 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
     };
 
     private void updateSeekBar(){
-        if(mediaPlayer.isPlaying()){
-            sb_playseekbar.setProgress((int) (((float)mediaPlayer.getCurrentPosition() /mediaPlayer.getDuration()) * 100));
-            handler.postDelayed(updater, 1000);
+        if(mediaPlayer != null){
+            if(mediaPlayer.isPlaying()){
+                sb_playseekbar.setProgress((int) (((float)mediaPlayer.getCurrentPosition() /mediaPlayer.getDuration()) * 100));
+                handler.postDelayed(updater, 1000);
+            }
         }
+
     }
 
     private String milliSecondsToTimer(long milliSeconds){
