@@ -11,4 +11,6 @@
 
     <string name="fragment_album_overview_title">ALBUM HOT</string>
     <string name="fragment_album_overview_more_album_title">Xem Thêm</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
