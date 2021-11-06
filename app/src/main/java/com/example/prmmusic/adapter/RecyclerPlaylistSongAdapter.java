@@ -1,6 +1,7 @@
 package com.example.prmmusic.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,11 +37,12 @@ public class RecyclerPlaylistSongAdapter extends RecyclerView.Adapter<RecyclerPl
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        Log.d("debug", "onResponse: playlistsongapdter");
         Song song = songs.get(position);
         holder.textViewIndex.setText(position + 1 + "");
         holder.textViewSongName.setText(song.getName());
         holder.textViewSingerName.setText(song.getSinger());
-        holder.itemView.setOnClickListener(v -> listener.onItemClick(song));
+        holder.itemView.setOnClickListener(v -> listener.onItemClick(song,holder.getLayoutPosition()));
     }
 
     @Override
@@ -63,6 +65,6 @@ public class RecyclerPlaylistSongAdapter extends RecyclerView.Adapter<RecyclerPl
     }
 
     public interface OnItemClickListener {
-        void onItemClick(Song song);
+        void onItemClick(Song song, int index);
     }
 }

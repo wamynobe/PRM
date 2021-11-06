@@ -77,7 +77,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
         objectAnimator.start();
     }
     public void init(){
-        setSampleData();
+        //setSampleData();
         imv_playandpause = findViewById(R.id.imv_PlayAndPause);
         tv_currenttime = findViewById(R.id.tv_currentime);
         tv_totalduration = findViewById(R.id.tv_totalduration);
@@ -114,7 +114,16 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+
         setContentView(R.layout.activity_musicplayer);
+        Intent caller = getIntent();
+        listSongs = caller.getParcelableArrayListExtra("songs");
+        if(caller.hasExtra("index")) {
+            currentSongPosition = caller.getIntExtra("index", 0);
+        }else{
+            currentSongPosition = 0;
+        }
+
         //find id for component
         init();
         //set up animator for music CD on activity
@@ -125,21 +134,21 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
         imv_playandpause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    if(mediaPlayer.isPlaying()){
-                        //stopService();
-                        objectAnimator.pause();
-                        handler.removeCallbacks(updater);
-                        mediaPlayer.pause();
-                        imv_playandpause.setImageResource(R.drawable.ic_play);
+                if(mediaPlayer.isPlaying()){
+                    //stopService();
+                    objectAnimator.pause();
+                    handler.removeCallbacks(updater);
+                    mediaPlayer.pause();
+                    imv_playandpause.setImageResource(R.drawable.ic_play);
 
-                    }else{
-                        //startService(new Intent(MusicPlayerActivity.this,PlayerService.class));
-                        objectAnimator.resume();
-                        mediaPlayer.start();
-                        imv_playandpause.setImageResource(R.drawable.ic_pause);
-                        updateSeekBar();
+                }else{
+                    //startService(new Intent(MusicPlayerActivity.this,PlayerService.class));
+                    objectAnimator.resume();
+                    mediaPlayer.start();
+                    imv_playandpause.setImageResource(R.drawable.ic_pause);
+                    updateSeekBar();
 
-                    }
+                }
             }
         });
 
@@ -383,18 +392,12 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
     public void onReceivedListSongs(List<Song> listSongs) {
 
     }
-    private void GetDataFromIntent(){
-        Intent intent =getIntent();
-        listSongs.clear();
-        if(intent!= null){
-            if(intent.hasExtra("cakhuc")){
-                Song song = intent.getParcelableExtra("cakhuc");
-                listSongs.add(song);
-            }
-            if(intent.hasExtra("cacbaihai")){
-                ArrayList<Song> baihatArrayList = intent.getParcelableArrayListExtra("cacbaihat");
-                listSongs = baihatArrayList;
+    private int getCurrentSongPosition(int songID){
+        for (int i = 0; i < listSongs.size(); i++){
+            if(songID == listSongs.get(i).getId()){
+                return i;
             }
         }
+        return 0;
     }
 }
