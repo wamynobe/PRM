@@ -128,7 +128,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
         init();
         //set up animator for music CD on activity
         animatorSetup();
-        PlaylistOverviewFragment.setPlayer(mediaPlayer);
+        PlaylistActivity.setPlayer(mediaPlayer);
         playSong(0);
         currentSongPosition = 0;
         imv_playandpause.setOnClickListener(new View.OnClickListener() {

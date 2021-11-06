@@ -1,6 +1,7 @@
 package com.example.prmmusic.activity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.prmmusic.R;
 import com.example.prmmusic.adapter.RecyclerPlaylistSongAdapter;
+import com.example.prmmusic.fragment.PlaylistOverviewFragment;
 import com.example.prmmusic.model.Playlist;
 import com.example.prmmusic.model.Song;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -22,6 +24,7 @@ import java.util.List;
 
 public class PlaylistActivity extends AppCompatActivity implements RecyclerPlaylistSongAdapter.OnItemClickListener {
     List<Song> listSongs;
+    private static MediaPlayer player;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,11 @@ public class PlaylistActivity extends AppCompatActivity implements RecyclerPlayl
     }
 
     private void handlePlayAllButtonClick(List<Song> songs) {
+        if(player != null){
+            player.stop();
+            player.release();
+
+        }
         Intent intent = new Intent(this, MusicPlayerActivity.class);
         intent.putParcelableArrayListExtra("songs", (ArrayList<? extends Parcelable>) songs);
         intent.putExtra("index", 0);
@@ -56,10 +64,17 @@ public class PlaylistActivity extends AppCompatActivity implements RecyclerPlayl
 
     @Override
     public void onItemClick(Song song, int index) {
-        Log.d("debug", "onResponse: playlistsong");
+        if(player != null){
+            player.stop();
+            player.release();
+        }
         Intent intent = new Intent(this, MusicPlayerActivity.class);
         intent.putParcelableArrayListExtra("songs", (ArrayList<? extends Parcelable>) listSongs);
         intent.putExtra("index", index);
         startActivity(intent);
+    }
+
+    public static void setPlayer(MediaPlayer player) {
+        PlaylistActivity.player = player;
     }
 }
