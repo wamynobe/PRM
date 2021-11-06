@@ -1,7 +1,6 @@
 package com.example.prmmusic.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -10,8 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.prmmusic.R;
-import com.example.prmmusic.adapter.RecyclePlayListAdapter;
-import com.example.prmmusic.model.Album;
 import com.example.prmmusic.model.Playlist;
 import com.example.prmmusic.model.Song;
 import com.example.prmmusic.service.APIService;

@@ -12,9 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PRMMusic"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".activity.PlayListSong"
-            android:exported="true" />
+
         <activity
             android:name=".activity.MusicPlayList"
             android:exported="true">
