@@ -5,6 +5,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
@@ -44,8 +45,17 @@ public class PlaylistActivity extends AppCompatActivity implements RecyclerPlayl
         picasso.load(playlist.getImageBackgroud()).into(playlistBackground);
         picasso.load(playlist.getImageIcon()).into(playlistIcon);
         recyclerView.setAdapter(new RecyclerPlaylistSongAdapter(this, listSongs, this));
+        iconBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(player != null){
+                    player.stop();
+                    player.release();
 
-        iconBack.setOnClickListener(v -> this.finish());
+                }
+                finish();
+            }
+        });
         buttonPlayAll.setOnClickListener(v -> handlePlayAllButtonClick(listSongs));
     }
 
