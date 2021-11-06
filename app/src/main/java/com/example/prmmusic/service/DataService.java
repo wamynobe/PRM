@@ -65,4 +65,8 @@ public interface DataService {
     @FormUrlEncoded
     @POST("searchByKeyword.php")
     Call<List<Song>> getSongsByKeyword(@Field("keyword") String keyword);
+
+    @FormUrlEncoded
+    @POST("searchbaihat.php")
+    Call<List<Song>> GetSearchBaiHat(@Field("tukhoa") String tukhoa);
 }

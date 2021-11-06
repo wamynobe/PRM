@@ -383,4 +383,18 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
     public void onReceivedListSongs(List<Song> listSongs) {
 
     }
+    private void GetDataFromIntent(){
+        Intent intent =getIntent();
+        listSongs.clear();
+        if(intent!= null){
+            if(intent.hasExtra("cakhuc")){
+                Song song = intent.getParcelableExtra("cakhuc");
+                listSongs.add(song);
+            }
+            if(intent.hasExtra("cacbaihai")){
+                ArrayList<Song> baihatArrayList = intent.getParcelableArrayListExtra("cacbaihat");
+                listSongs = baihatArrayList;
+            }
+        }
+    }
 }
