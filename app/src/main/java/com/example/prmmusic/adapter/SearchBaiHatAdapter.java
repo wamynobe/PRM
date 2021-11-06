@@ -20,14 +20,16 @@ import com.example.prmmusic.service.DataService;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 
 public class SearchBaiHatAdapter extends  RecyclerView.Adapter<SearchBaiHatAdapter.ViewHolder> {
     Context context;
     ArrayList<Song> mangbaihat;
 
-    public SearchBaiHatAdapter(ActivityResultRegistry context, ArrayList<Song> mangbaihat) {
+    public SearchBaiHatAdapter(Context context, ArrayList<Song> mangbaihat) {
         this.context = context;
         this.mangbaihat = mangbaihat;
     }

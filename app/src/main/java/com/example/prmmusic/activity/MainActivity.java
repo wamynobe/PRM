@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
          public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
              ArrayList<Song> mangbaihat = (ArrayList<Song>) response.body();
              if(mangbaihat.size()>0){
-                 searchBaiHatAdapter = new SearchBaiHatAdapter(getActivityResultRegistry(),mangbaihat);
+                 searchBaiHatAdapter = new SearchBaiHatAdapter(MainActivity.this,mangbaihat);
                  LinearLayoutManager linearLayoutManager = new  LinearLayoutManager(getApplicationContext());
              }
          }
