@@ -87,12 +87,21 @@ public class TrendingFragment extends Fragment implements RecyclerTrendingAdapte
             @Override
             public void onResponse(@NonNull Call<List<Song>> call,
                     @NonNull Response<List<Song>> response) {
+
                 Playlist playlist = new Playlist(trending.getId(), trending.getImage(),
                         trending.getSongImage(), trending.getSongName());
+
+
                 Intent intent = new Intent(getContext(), PlaylistActivity.class);
+
+
                 intent.putExtra("playlist", playlist);
+
+
                 intent.putParcelableArrayListExtra("songs",
                         (ArrayList<? extends Parcelable>) response.body());
+
+
                 startActivity(intent);
                 Log.d("debug", "onResponse: trendingfrag");
             }

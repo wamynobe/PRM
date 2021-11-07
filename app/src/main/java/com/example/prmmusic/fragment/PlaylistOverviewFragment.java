@@ -60,9 +60,6 @@ public class PlaylistOverviewFragment extends Fragment implements RecyclerPlayli
         });
     }
 
-    public static void setPlayer(MediaPlayer player) {
-        PlaylistOverviewFragment.player = player;
-    }
 
     @Override
     public void onItemClick(String playlistId) {
