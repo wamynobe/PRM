@@ -76,14 +76,14 @@ public class SearchBaiHatAdapter extends  RecyclerView.Adapter<SearchBaiHatAdapt
                     context.startActivity(intent);
                 }
             });
-//            imgluotthich.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    imgluotthich.setImageResource(R.drawable.ic_next);
-//                    DataService dataService = APIService.getService();
-//                    Call<String> callback = dataService.
-//                }
-//            });
+//          imgluotthich.setOnClickListener(new View.OnClickListener() {
+//              @Override
+//              public void onClick(View v) {
+//                  imgluotthich.setImageResource(R.drawable.ic_next);
+//                  DataService dataService =APIService.getService();
+//                  Call<String> callback = dataService.UpdateLuotThich
+//              }
+//          });
         }
     }
 }
