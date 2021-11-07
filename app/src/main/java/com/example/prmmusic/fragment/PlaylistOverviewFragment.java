@@ -62,6 +62,10 @@ public class PlaylistOverviewFragment extends Fragment implements RecyclerPlayli
     }
 
 
+
+
+
+
     @Override
     public void onItemClick(Playlist playlist) {
         DataService dataService = APIService.getService();
@@ -69,17 +73,17 @@ public class PlaylistOverviewFragment extends Fragment implements RecyclerPlayli
         callBack.enqueue(new Callback<List<Song>>() {
             @Override
             public void onResponse(@NonNull Call<List<Song>> call,
-                    @NonNull Response<List<Song>> response) {
+                                   @NonNull Response<List<Song>> response) {
                 Intent intent = new Intent(getContext(), PlaylistActivity.class);
                 intent.putExtra("playlist", playlist);
                 intent.putParcelableArrayListExtra("songs",
                         (ArrayList<? extends Parcelable>) response.body());
                 startActivity(intent);
-            }
+    }
 
             @Override
-            public void onFailure(@NonNull Call<List<Song>> call, @NonNull Throwable t) {
-                Log.d("fail", "fail to load data");
+            public void onFailure(Call<List<Song>> call, Throwable t) {
+
             }
         });
     }

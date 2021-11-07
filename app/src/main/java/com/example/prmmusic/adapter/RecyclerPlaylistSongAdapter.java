@@ -1,6 +1,7 @@
 package com.example.prmmusic.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,13 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.prmmusic.R;
+import com.example.prmmusic.activity.PlaylistActivity;
 import com.example.prmmusic.model.Song;
 
 import java.util.List;
 
 public class RecyclerPlaylistSongAdapter extends RecyclerView.Adapter<RecyclerPlaylistSongAdapter.MyViewHolder> {
 
-    private final Context context;
+    Context context;
     private final List<Song> songs;
     private final OnItemClickListener listener;
 
@@ -50,7 +52,7 @@ public class RecyclerPlaylistSongAdapter extends RecyclerView.Adapter<RecyclerPl
         return songs.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewIndex;
         TextView textViewSongName;
@@ -61,6 +63,15 @@ public class RecyclerPlaylistSongAdapter extends RecyclerView.Adapter<RecyclerPl
             textViewIndex = itemView.findViewById(R.id.text_view_index);
             textViewSongName = itemView.findViewById(R.id.text_view_song_name);
             textViewSingerName = itemView.findViewById(R.id.text_view_singer_name);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context,PlaylistActivity.class);
+//                    intent.putExtra("songs",songs);
+
+                }
+            });
         }
     }
 
