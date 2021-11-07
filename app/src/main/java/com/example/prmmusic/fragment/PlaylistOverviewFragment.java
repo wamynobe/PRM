@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.prmmusic.R;
 import com.example.prmmusic.activity.MusicPlayerActivity;
+import com.example.prmmusic.activity.PlaylistActivity;
 import com.example.prmmusic.adapter.RecyclerPlaylistOverviewAdapter;
 import com.example.prmmusic.model.Playlist;
 import com.example.prmmusic.model.Song;
@@ -62,23 +63,18 @@ public class PlaylistOverviewFragment extends Fragment implements RecyclerPlayli
 
 
     @Override
-    public void onItemClick(String playlistId) {
+    public void onItemClick(Playlist playlist) {
         DataService dataService = APIService.getService();
-        Call<List<Song>> callBack = dataService.getSongsFromPlaylist(playlistId);
+        Call<List<Song>> callBack = dataService.getSongsFromPlaylist(playlist.getId());
         callBack.enqueue(new Callback<List<Song>>() {
             @Override
             public void onResponse(@NonNull Call<List<Song>> call,
                     @NonNull Response<List<Song>> response) {
-                if(player != null){
-                    player.stop();
-                    player.release();
-                    Log.d("release", "onResponse: release");
-                }
-                Intent intent = new Intent(getContext(), MusicPlayerActivity.class);
+                Intent intent = new Intent(getContext(), PlaylistActivity.class);
+                intent.putExtra("playlist", playlist);
                 intent.putParcelableArrayListExtra("songs",
                         (ArrayList<? extends Parcelable>) response.body());
                 startActivity(intent);
-
             }
 
             @Override

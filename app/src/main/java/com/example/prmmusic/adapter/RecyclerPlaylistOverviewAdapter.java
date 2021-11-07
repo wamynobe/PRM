@@ -44,7 +44,7 @@ public class RecyclerPlaylistOverviewAdapter extends RecyclerView.Adapter<Recycl
         picasso.load(playlist.getImageBackgroud()).into(holder.playlistBackground);
         picasso.load(playlist.getImageIcon()).into(holder.playlistIcon);
         holder.playlistName.setText(playlist.getName());
-        holder.itemView.setOnClickListener(v -> listener.onItemClick(playlist.getId()));
+        holder.itemView.setOnClickListener(v -> listener.onItemClick(playlist));
     }
 
     @Override
@@ -67,6 +67,6 @@ public class RecyclerPlaylistOverviewAdapter extends RecyclerView.Adapter<Recycl
     }
 
     public interface OnItemClickListener {
-        void onItemClick(String playlistId);
+        void onItemClick(Playlist playlist);
     }
 }
