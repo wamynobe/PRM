@@ -48,17 +48,17 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
          @Override
          public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
              ArrayList<Song> mangbaihat = (ArrayList<Song>) response.body();
-             if(mangbaihat.size()>0){
-                 searchBaiHatAdapter = new SearchBaiHatAdapter(MainActivity.this,mangbaihat);
-                 LinearLayoutManager linearLayoutManager = new  LinearLayoutManager(getApplicationContext());
-                 recyclerViewsearchbaihat.setLayoutManager(linearLayoutManager);
-                 recyclerViewsearchbaihat.setAdapter(searchBaiHatAdapter);
-                 txtkhongcodulieu.setVisibility(View.GONE);
-                 recyclerViewsearchbaihat.setVisibility(View.VISIBLE);
-             }else{
-                 recyclerViewsearchbaihat.setVisibility(View.GONE);
-                 txtkhongcodulieu.setVisibility(View.VISIBLE);
-             }
+//             if(mangbaihat.size()>0){
+//                 searchBaiHatAdapter = new SearchBaiHatAdapter(MainActivity.this,mangbaihat);
+//                 LinearLayoutManager linearLayoutManager = new  LinearLayoutManager(getApplicationContext());
+//                 recyclerViewsearchbaihat.setLayoutManager(linearLayoutManager);
+//                 recyclerViewsearchbaihat.setAdapter(searchBaiHatAdapter);
+//                 txtkhongcodulieu.setVisibility(View.GONE);
+//                 recyclerViewsearchbaihat.setVisibility(View.VISIBLE);
+//             }else{
+//                 recyclerViewsearchbaihat.setVisibility(View.GONE);
+//                 txtkhongcodulieu.setVisibility(View.VISIBLE);
+//             }
          }
 
          @Override

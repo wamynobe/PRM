@@ -15,8 +15,15 @@
 
         <activity
             android:name=".activity.MusicPlayList"
-            android:exported="true">
+            android:exported="true"
+            >
 
+        </activity>
+        <activity
+            android:name=".activity.AllTopicActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            >
         </activity>
         <activity
             android:name=".activity.MainActivity"

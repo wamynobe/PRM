@@ -1,5 +1,6 @@
 package com.example.prmmusic.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.prmmusic.R;
+import com.example.prmmusic.activity.AllTopicActivity;
 import com.example.prmmusic.adapter.RecyclerTopicOverviewAdapter;
 import com.example.prmmusic.model.Topic;
 import com.example.prmmusic.model.TopicAndType;
@@ -41,7 +43,8 @@ public class TopicOverviewFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         TextView moreTopic = view.findViewById(R.id.text_view_more_topic);
         moreTopic.setOnClickListener(v -> {
-
+            Intent intent = new Intent(getActivity(), AllTopicActivity.class);
+            startActivity(intent);
         });
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_topic_overview);
         DataService dataService = APIService.getService();

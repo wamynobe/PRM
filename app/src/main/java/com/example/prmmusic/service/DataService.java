@@ -27,6 +27,17 @@ public interface DataService {
     Call<List<Topic>> getAllTopics();
 
     @FormUrlEncoded
+    @POST("getAllTypeByTopic.php")
+    Call<List<Type>> getTypeByTopic(@Field("topicID") String topicID);
+
+    @GET("getAllAlbum.php")
+    Call<List<Album>> getALlAlbum();
+
+    @FormUrlEncoded
+    @POST("getListSong.php")
+    Call<List<Type>> getPlayyListByAlbum(@Field("typeID") String typeID);
+
+    @FormUrlEncoded
     @POST("getListSong.php")
     Call<List<Song>> getSongsFromAlbum(@Field("albumID") String albumID);
 
@@ -55,11 +66,8 @@ public interface DataService {
     @POST("getListSong.php")
     Call<List<Song>> getSongsFromType(@Field("typeID") String typeID);
 
-
-
-    @FormUrlEncoded
-    @POST("getAllTypeByTopic.php")
-    Call<List<Type>> getTypeByTopic(@Field("topicID") String topicID);
+    @GET("getListTypeAndTopic.php")
+    Call<TopicAndType> getListTypeAndTopic();
 
 
     @FormUrlEncoded

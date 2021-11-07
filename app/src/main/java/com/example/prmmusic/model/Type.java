@@ -3,7 +3,9 @@ package com.example.prmmusic.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Type {
+import java.io.Serializable;
+
+public class Type implements Serializable {
     @SerializedName("id")
     @Expose
     private String id;
