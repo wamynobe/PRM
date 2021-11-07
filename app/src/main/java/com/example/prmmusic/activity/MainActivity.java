@@ -32,15 +32,15 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         setContentView(R.layout.activity_main);
 
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.clear();
-        getMenuInflater().inflate(R.menu.main, menu);
-        MenuItem searchItem = menu.findItem(R.id.menu_search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        searchView.setOnQueryTextListener(this);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        menu.clear();
+//        getMenuInflater().inflate(R.menu.main, menu);
+//        MenuItem searchItem = menu.findItem(R.id.menu_search);
+//        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+//        searchView.setOnQueryTextListener(this);
+//        return true;
+//    }
  private void SearchTuKhoaBaiHat(String query){
      DataService dataService = APIService.getService();
      Call<List<Song>> callback = dataService.getSongsByKeyword(query);
