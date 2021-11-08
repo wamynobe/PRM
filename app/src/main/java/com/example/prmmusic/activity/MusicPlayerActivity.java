@@ -119,9 +119,11 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
         Intent caller = getIntent();
         listSongs = caller.getParcelableArrayListExtra("songs");
         if(caller.hasExtra("index")) {
-            currentSongPosition = caller.getIntExtra("index", 0);
+            currentSongPosition = caller.getIntExtra("index", 1);
+            Log.d("position", "onPostCreate: " + currentSongPosition);
         }else{
             currentSongPosition = 0;
+            Log.d("position", "onPostCreate: dafuck");
         }
 
         //find id for component
@@ -129,7 +131,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
         //set up animator for music CD on activity
         animatorSetup();
         PlaylistActivity.setPlayer(mediaPlayer);
-        playSong(0);
+        playSong(currentSongPosition);
         currentSongPosition = 0;
         imv_playandpause.setOnClickListener(new View.OnClickListener() {
             @Override

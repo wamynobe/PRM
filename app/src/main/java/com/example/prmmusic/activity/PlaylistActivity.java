@@ -82,6 +82,7 @@ public class PlaylistActivity extends AppCompatActivity implements RecyclerPlayl
         Intent intent = new Intent(this, MusicPlayerActivity.class);
         intent.putParcelableArrayListExtra("songs", (ArrayList<? extends Parcelable>) listSongs);
         intent.putExtra("index", index);
+        Log.d("index", "onItemClick: " + index);
         startActivity(intent);
     }
 
