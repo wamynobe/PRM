@@ -16,6 +16,22 @@
         android:layout_gravity="left"
         android:src="@drawable/ic_back"
         />
+    <TextView
+        android:id="@+id/tv_songname"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="-50dp"
+        android:layout_marginLeft="0dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:singleLine="true"
+        android:scrollHorizontally="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit ="marquee_forever"
+        android:text="hello"
+        />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imvc_dianhac"
