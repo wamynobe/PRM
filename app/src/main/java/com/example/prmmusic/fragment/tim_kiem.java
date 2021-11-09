@@ -1,5 +1,7 @@
 package com.example.prmmusic.fragment;
 
+import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -32,11 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link tim_kiem#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class tim_kiem extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -70,7 +68,7 @@ public class tim_kiem extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Log.d("BBB",query);
+                SearchTuKhoaBaiHat(query);
                 return  true;
             }
 

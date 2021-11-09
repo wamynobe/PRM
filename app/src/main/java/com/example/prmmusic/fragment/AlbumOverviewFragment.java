@@ -2,6 +2,7 @@ package com.example.prmmusic.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,18 +17,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.prmmusic.R;
 import com.example.prmmusic.activity.AlbumListActivity;
 import com.example.prmmusic.activity.AllTopicActivity;
+import com.example.prmmusic.activity.PlaylistActivity;
 import com.example.prmmusic.adapter.RecyclerAlbumOverviewAdapter;
 import com.example.prmmusic.model.Album;
+import com.example.prmmusic.model.Playlist;
+import com.example.prmmusic.model.Song;
 import com.example.prmmusic.service.APIService;
 import com.example.prmmusic.service.DataService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AlbumOverviewFragment extends Fragment {
+public class AlbumOverviewFragment extends Fragment implements RecyclerAlbumOverviewAdapter.OnItemClickListener{
 
     @Nullable
     @Override
@@ -52,12 +57,38 @@ public class AlbumOverviewFragment extends Fragment {
             public void onResponse(@NonNull Call<List<Album>> call,
                                    @NonNull Response<List<Album>> response) {
                 recyclerView.setAdapter(
-                        new RecyclerAlbumOverviewAdapter(getContext(), response.body()));
+                        new RecyclerAlbumOverviewAdapter(getContext(), response.body(),
+                                AlbumOverviewFragment.this));
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Album>> call, @NonNull Throwable t) {
                 Log.d("fail", "fail to load data");
+            }
+        });
+    }
+
+    @Override
+    public void onItemClick(Album album) {
+        DataService dataService = APIService.getService();
+        Call<List<Song>> callBack = dataService.getSongsFromAlbum(album.getId());
+        callBack.enqueue(new Callback<List<Song>>() {
+            @Override
+            public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
+                Intent intent = new Intent(getContext(), PlaylistActivity.class);
+                Playlist playlist = new Playlist();
+                playlist.setImageIcon(album.getImage());
+                playlist.setImageBackgroud(album.getImage());
+                playlist.setName(album.getName());
+                intent.putExtra("playlist", playlist);
+                intent.putParcelableArrayListExtra("songs",
+                        (ArrayList<? extends Parcelable>) response.body());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onFailure(Call<List<Song>> call, Throwable t) {
+
             }
         });
     }

@@ -101,7 +101,6 @@ public class TrendingFragment extends Fragment implements RecyclerTrendingAdapte
                 intent.putParcelableArrayListExtra("songs",
                         (ArrayList<? extends Parcelable>) response.body());
 
-
                 startActivity(intent);
                 Log.d("debug", "onResponse: trendingfrag");
             }

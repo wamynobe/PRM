@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
         <fragment
             android:id="@+id/fragment_trending"
             android:name="com.example.prmmusic.fragment.TrendingFragment"

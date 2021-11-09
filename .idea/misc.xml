@@ -5,10 +5,25 @@
       <map>
         <entry key="..\:/PRM/MusicApp/PRM/app/src/main/res/layout/activity_album_list.xml" value="0.20885416666666667" />
         <entry key="..\:/PRM/MusicApp/PRM/app/src/main/res/layout/activity_all_topic.xml" value="0.20885416666666667" />
+        <entry key="..\:/PRM/MusicApp/PRM/app/src/main/res/layout/activity_list_type_by_topic.xml" value="0.20885416666666667" />
         <entry key="..\:/PRM/MusicApp/PRM/app/src/main/res/layout/activity_main.xml" value="0.20885416666666667" />
+        <entry key="..\:/PRM/MusicApp/PRM/app/src/main/res/layout/activity_music_play_list.xml" value="0.20885416666666667" />
+        <entry key="..\:/PRM/MusicApp/PRM/app/src/main/res/layout/activity_musicplayer.xml" value="0.20885416666666667" />
+        <entry key="..\:/PRM/MusicApp/PRM/app/src/main/res/layout/activity_playlist.xml" value="0.20885416666666667" />
         <entry key="..\:/PRM/MusicApp/PRM/app/src/main/res/layout/album_item.xml" value="0.20885416666666667" />
+        <entry key="..\:/PRM/MusicApp/PRM/app/src/main/res/layout/album_overview_item.xml" value="0.20885416666666667" />
+        <entry key="..\:/PRM/MusicApp/PRM/app/src/main/res/layout/dong_search_baihat.xml" value="0.20885416666666667" />
+        <entry key="..\:/PRM/MusicApp/PRM/app/src/main/res/layout/fragment_album_overview.xml" value="0.36770833333333336" />
+        <entry key="..\:/PRM/MusicApp/PRM/app/src/main/res/layout/fragment_playlist_overview.xml" value="0.20885416666666667" />
+        <entry key="..\:/PRM/MusicApp/PRM/app/src/main/res/layout/fragment_tim_kiem.xml" value="0.20885416666666667" />
+        <entry key="..\:/PRM/MusicApp/PRM/app/src/main/res/layout/fragment_topic_overview.xml" value="0.20885416666666667" />
+        <entry key="..\:/PRM/MusicApp/PRM/app/src/main/res/layout/play_list_item.xml" value="0.20885416666666667" />
+        <entry key="..\:/PRM/MusicApp/PRM/app/src/main/res/layout/playlist_song_item.xml" value="0.20885416666666667" />
         <entry key="..\:/PRM/MusicApp/PRM/app/src/main/res/layout/topic_item.xml" value="0.20885416666666667" />
+        <entry key="..\:/PRM/MusicApp/PRM/app/src/main/res/layout/topic_overview_item.xml" value="0.20885416666666667" />
+        <entry key="..\:/PRM/MusicApp/PRM/app/src/main/res/layout/trending_item.xml" value="0.20885416666666667" />
         <entry key="..\:/PRM/MusicApp/PRM/app/src/main/res/layout/type_by_topic_item.xml" value="0.20885416666666667" />
+        <entry key="..\:/PRM/MusicApp/PRM/app/src/main/res/menu/search_view.xml" value="0.371875" />
         <entry key="..\:/Users/nqh14/AndroidStudioProjects/PRMFinal/app/src/main/res/layout/activity_play_list_song.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/nqh14/AndroidStudioProjects/PRMFinal/app/src/main/res/layout/activity_playlist.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/nqh14/AndroidStudioProjects/PRMFinal/app/src/main/res/layout/fragment_trending.xml" value="0.36666666666666664" />
@@ -31,13 +46,13 @@
         <entry key="..\:/huynq_android/PRM/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/huynq_android/PRM/app/src/main/res/layout/activity_music_play_list.xml" value="0.22" />
         <entry key="..\:/huynq_android/PRM/app/src/main/res/layout/activity_musicplayer.xml" value="0.18059777102330293" />
-        <entry key="..\:/huynq_android/PRM/app/src/main/res/layout/dong_search_baihat.xml" value="0.33" />
+        <entry key="..\:/huynq_android/PRM/app/src/main/res/layout/dong_search_baihat.xml" value="0.17603850050658562" />
         <entry key="..\:/huynq_android/PRM/app/src/main/res/layout/fragment__search.xml" value="0.14" />
         <entry key="..\:/huynq_android/PRM/app/src/main/res/layout/fragment_tim_kiem.xml" value="0.1" />
         <entry key="..\:/huynq_android/PRM/app/src/main/res/layout/fragment_tim_kiem2.xml" value="0.1" />
         <entry key="..\:/huynq_android/PRM/app/src/main/res/layout/fragment_tim_kiem3.xml" value="0.1" />
         <entry key="..\:/huynq_android/PRM/app/src/main/res/menu/main.xml" value="0.33" />
-        <entry key="..\:/huynq_android/PRM/app/src/main/res/menu/search_view.xml" value="0.1" />
+        <entry key="..\:/huynq_android/PRM/app/src/main/res/menu/search_view.xml" value="0.25" />
       </map>
     </option>
   </component>

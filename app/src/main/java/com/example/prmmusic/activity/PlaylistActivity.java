@@ -33,7 +33,7 @@ public class PlaylistActivity extends AppCompatActivity implements RecyclerPlayl
 
         Intent caller = getIntent();
         Playlist playlist = (Playlist) caller.getSerializableExtra("playlist");
-        
+        Log.d("aaa", "onCreate: " + playlist.getName());
         listSongs = caller.getParcelableArrayListExtra("songs");
 
         ImageView iconBack = findViewById(R.id.icon_back);

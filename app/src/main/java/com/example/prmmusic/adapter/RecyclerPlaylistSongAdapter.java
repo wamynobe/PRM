@@ -37,7 +37,6 @@ public class RecyclerPlaylistSongAdapter extends RecyclerView.Adapter<RecyclerPl
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Log.d("debug", "onResponse: playlistsongapdter");
         Song song = songs.get(position);
         holder.textViewIndex.setText(position + 1 + "");
         holder.textViewSongName.setText(song.getName());

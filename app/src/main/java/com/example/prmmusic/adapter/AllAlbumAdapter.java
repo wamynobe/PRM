@@ -2,6 +2,8 @@ package com.example.prmmusic.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,18 +15,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.prmmusic.R;
 import com.example.prmmusic.activity.MusicPlayList;
+import com.example.prmmusic.activity.PlaylistActivity;
 import com.example.prmmusic.model.Album;
+import com.example.prmmusic.model.Playlist;
+import com.example.prmmusic.model.Song;
+import com.example.prmmusic.service.APIService;
+import com.example.prmmusic.service.DataService;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AllAlbumAdapter extends RecyclerView.Adapter<AllAlbumAdapter.ViewHolder> {
     Context context;
     ArrayList<Album> albumArrayList;
-
-    public AllAlbumAdapter(Context context, ArrayList<Album> albumArrayList) {
+    private final OnItemClickListener listener;
+    public AllAlbumAdapter(Context context, ArrayList<Album> albumArrayList, OnItemClickListener listener) {
         this.context = context;
         this.albumArrayList = albumArrayList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -41,7 +54,7 @@ public class AllAlbumAdapter extends RecyclerView.Adapter<AllAlbumAdapter.ViewHo
         Picasso.get().load(album.getImage()).into(holder.imageViewAllAlbum);
         holder.textViewAllAlbum.setText(album.getName());
         holder.textviewsingername.setText(album.getSingerName());
-
+        holder.itemView.setOnClickListener(v -> listener.onItemClick(album));
     }
 
     @Override
@@ -49,6 +62,9 @@ public class AllAlbumAdapter extends RecyclerView.Adapter<AllAlbumAdapter.ViewHo
         return albumArrayList.size();
     }
 
+    public interface OnItemClickListener {
+        void onItemClick(Album album);
+    }
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageViewAllAlbum;
         TextView textViewAllAlbum;
@@ -58,14 +74,6 @@ public class AllAlbumAdapter extends RecyclerView.Adapter<AllAlbumAdapter.ViewHo
             imageViewAllAlbum = itemView.findViewById(R.id.imageviewalbumitem);
             textViewAllAlbum = itemView.findViewById(R.id.textviewalbumitem);
             textviewsingername = itemView.findViewById(R.id.textviewsingername);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, MusicPlayList.class);
-                    intent.putExtra("albumID", albumArrayList.get(getPosition()));
-                    context.startActivity(intent);
-                }
-            });
         }
     }
 

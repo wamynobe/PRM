@@ -7,9 +7,9 @@
     >
 
     <ImageView
-        android:src="@drawable/ic_launcher_background"
         android:id="@+id/imageviewtopicitem"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:scaleType="fitXY" />
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_launcher_background" />
 </RelativeLayout>

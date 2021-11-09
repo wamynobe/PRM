@@ -20,8 +20,6 @@ public interface DataService {
     @GET("getAllPlaylist.php")
     Call<List<Playlist>> getDataPlayList();
 
-    @GET("getAllAlbum.php")
-    Call<List<Album>> getAllAlbums();
 
     @GET("getAllTopic.php")
     Call<List<Topic>> getAllTopics();
