@@ -30,7 +30,8 @@
         android:scrollHorizontally="true"
         android:ellipsize="marquee"
         android:marqueeRepeatLimit ="marquee_forever"
-        android:text="hello"
+        android:gravity="center_horizontal"
+        android:textAlignment="center"
         />
 
     <de.hdodenhof.circleimageview.CircleImageView
