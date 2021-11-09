@@ -52,6 +52,7 @@ public class PlaylistActivity extends AppCompatActivity implements RecyclerPlayl
                 if(player != null){
                     player.stop();
                     player.release();
+                    player = null;
 
                 }
                 finish();
@@ -64,7 +65,6 @@ public class PlaylistActivity extends AppCompatActivity implements RecyclerPlayl
         if(player != null){
             player.stop();
             player.release();
-
         }
         Intent intent = new Intent(this, MusicPlayerActivity.class);
         intent.putParcelableArrayListExtra("songs", (ArrayList<? extends Parcelable>) songs);
