@@ -9,6 +9,7 @@ import android.graphics.LightingColorFilter;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -29,6 +30,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -37,7 +39,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
     private ObjectAnimator objectAnimator;
     private CircleImageView imvc_dianhac;
     private ImageView imv_playandpause, imv_next, imv_previous, imv_back, imv_repeat, imv_shuffle;
-    private TextView tv_currenttime, tv_totalduration;
+    private TextView tv_currenttime, tv_totalduration, tv_songname;
     private SeekBar sb_playseekbar;
     private MediaPlayer mediaPlayer = new MediaPlayer();;
     private Handler handler = new Handler();
@@ -88,6 +90,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
         imv_back = findViewById(R.id.imv_back);
         imv_repeat = findViewById(R.id.imv_repeat);
         imv_shuffle = findViewById(R.id.imv_shuffle);
+        tv_songname = findViewById(R.id.tv_songname);
 
 
     }
@@ -103,6 +106,8 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
         prepareMediaPlayer(urlSong);
         mediaPlayer.start();
         imv_playandpause.setImageResource(R.drawable.ic_pause);
+        tv_songname.setText(listSongs.get(index).getName().toUpperCase(Locale.ROOT));
+        tv_songname.setSelected(true);
         updateSeekBar();
     }
 
@@ -119,7 +124,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
         Intent caller = getIntent();
         listSongs = caller.getParcelableArrayListExtra("songs");
         if(caller.hasExtra("index")) {
-            currentSongPosition = caller.getIntExtra("index", 0);
+            currentSongPosition = caller.getIntExtra("index", 1);
         }else{
             currentSongPosition = 0;
         }
@@ -129,7 +134,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
         //set up animator for music CD on activity
         animatorSetup();
         PlaylistActivity.setPlayer(mediaPlayer);
-        playSong(0);
+        playSong(currentSongPosition);
         currentSongPosition = 0;
         imv_playandpause.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -380,6 +385,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements PassDataIn
     }
     public void updateImgDiaNhac(String imageUrl) {
         Picasso.get().load(imageUrl).into(imvc_dianhac);
+
     }
 
     public int getRandomIndex(){
