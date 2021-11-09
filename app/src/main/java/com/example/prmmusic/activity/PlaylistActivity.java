@@ -30,7 +30,7 @@ public class PlaylistActivity extends AppCompatActivity implements RecyclerPlayl
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playlist);
-
+//        Log.d("thanhdeptraiso1","playlist");
         Intent caller = getIntent();
         Playlist playlist = (Playlist) caller.getSerializableExtra("playlist");
         
