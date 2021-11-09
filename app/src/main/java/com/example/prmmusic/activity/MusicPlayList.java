@@ -55,7 +55,7 @@ public class MusicPlayList extends AppCompatActivity {
 //                rcview = new RecyclerPlaylistSongAdapter();
 //                ListAllPlayListAdapter listAllPlayListAdapter = new ListAllPlayListAdapter(MusicPlayList.this, playlists);
 //                recyclerViewAllPlaylist = new RecyclerView(MusicPlayList.this, playlists);
-//                recyclerViewAllPlaylist.setA
+//                recyclerViewAllPlaylist.se
             }
 
             @Override
