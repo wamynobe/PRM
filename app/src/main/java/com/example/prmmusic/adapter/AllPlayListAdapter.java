@@ -18,7 +18,7 @@ import com.example.prmmusic.model.Playlist;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-
+// thanh lam class nao
 public class AllPlayListAdapter extends RecyclerView.Adapter<AllPlayListAdapter.ViewHolder> {
     Context context;
     ArrayList<Playlist> playlistArrayList;
