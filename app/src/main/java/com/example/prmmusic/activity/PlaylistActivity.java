@@ -30,7 +30,7 @@ public class PlaylistActivity extends AppCompatActivity implements RecyclerPlayl
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playlist);
-
+//        Log.d("thanhdeptraiso1","playlist");
         Intent caller = getIntent();
         Playlist playlist = (Playlist) caller.getSerializableExtra("playlist");
         Log.d("aaa", "onCreate: " + playlist.getName());
@@ -52,6 +52,7 @@ public class PlaylistActivity extends AppCompatActivity implements RecyclerPlayl
                 if(player != null){
                     player.stop();
                     player.release();
+                    player = null;
 
                 }
                 finish();
@@ -64,7 +65,6 @@ public class PlaylistActivity extends AppCompatActivity implements RecyclerPlayl
         if(player != null){
             player.stop();
             player.release();
-
         }
         Intent intent = new Intent(this, MusicPlayerActivity.class);
         intent.putParcelableArrayListExtra("songs", (ArrayList<? extends Parcelable>) songs);
@@ -82,6 +82,7 @@ public class PlaylistActivity extends AppCompatActivity implements RecyclerPlayl
         Intent intent = new Intent(this, MusicPlayerActivity.class);
         intent.putParcelableArrayListExtra("songs", (ArrayList<? extends Parcelable>) listSongs);
         intent.putExtra("index", index);
+        Log.d("index", "onItemClick: " + index);
         startActivity(intent);
     }
 
