@@ -52,7 +52,7 @@ public class AllPlayListAdapter extends RecyclerView.Adapter<AllPlayListAdapter.
         Playlist playlist = playlistArrayList.get(position);
         Picasso.get().load(playlist.getImageIcon()).into(holder.imageViewAllPlayList);
         holder.textViewAllPlaylist.setText(playlist.getName());
-        holder.textviewPlaylistDesc.setText(playlist.getId());
+//        holder.textviewPlaylistDesc.setText(playlist.getId());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
