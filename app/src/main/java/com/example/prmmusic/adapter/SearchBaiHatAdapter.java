@@ -2,88 +2,77 @@ package com.example.prmmusic.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.activity.result.ActivityResultRegistry;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.prmmusic.R;
-import com.example.prmmusic.activity.PlaylistActivity;
+import com.example.prmmusic.activity.MusicPlayerActivity;
 import com.example.prmmusic.model.Song;
-import com.example.prmmusic.service.APIService;
-import com.example.prmmusic.service.DataService;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
+public class SearchBaiHatAdapter extends RecyclerView.Adapter<SearchBaiHatAdapter.ViewHolder> {
 
-public class SearchBaiHatAdapter extends  RecyclerView.Adapter<SearchBaiHatAdapter.ViewHolder> {
-    Context context;
-    ArrayList<Song> mangbaihat;
+    private final Context context;
+    private final List<Song> results;
 
-    public SearchBaiHatAdapter(Context context, ArrayList<Song> mangbaihat) {
+    public SearchBaiHatAdapter(Context context, List<Song> results) {
         this.context = context;
-        this.mangbaihat = mangbaihat;
+        this.results = results;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.dong_search_baihat,parent,false);
-        return new ViewHolder(view);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        return new ViewHolder(inflater.inflate(R.layout.dong_search_baihat, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Song song = mangbaihat.get(position);
+        Song song = results.get(position);
         holder.txtTenbaihat.setText(song.getName());
         holder.txtCasi.setText(song.getSinger());
-        Picasso.get().load(song.getLink()).into(holder.imgbaihat);
-
-
+        Picasso.get().load(song.getImage()).into(holder.imgbaihat);
     }
 
     @Override
     public int getItemCount() {
-        return mangbaihat.size();
+        return results.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView txtTenbaihat,txtCasi;
-        ImageView imgbaihat,imgluotthich;
+    class ViewHolder extends RecyclerView.ViewHolder {
 
+        TextView txtTenbaihat;
+        TextView txtCasi;
+        ImageView imgbaihat;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtTenbaihat = itemView.findViewById(R.id.textViewSearchtenbaihat);
             txtCasi = itemView.findViewById(R.id.textViewSeachCaSi);
             imgbaihat = itemView.findViewById(R.id.imageViewSearchbaihat);
-            imgluotthich = itemView.findViewById(R.id.imageViewSearchluotthich);
-            itemView.setOnClickListener(new View.OnClickListener(){
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, PlaylistActivity.class);
-                    intent.putExtra("cakhuc",mangbaihat.get(getPosition()));
+                    Song selected = results.get(getAdapterPosition());
+                    List<Song> songs = new ArrayList<>();
+                    songs.add(selected);
+                    Intent intent = new Intent(context, MusicPlayerActivity.class);
+                    intent.putParcelableArrayListExtra("songs",
+                            (ArrayList<? extends Parcelable>) songs);
                     context.startActivity(intent);
                 }
             });
-//          imgluotthich.setOnClickListener(new View.OnClickListener() {
-//              @Override
-//              public void onClick(View v) {
-//                  imgluotthich.setImageResource(R.drawable.ic_next);
-//                  DataService dataService =APIService.getService();
-//                  Call<String> callback = dataService.UpdateLuotThich
-//              }
-//          });
         }
     }
 }

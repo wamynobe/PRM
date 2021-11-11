@@ -1,43 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:scrollbars="none">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
-        <fragment
-            android:id="@+id/fragment_trending"
-            android:name="com.example.prmmusic.fragment.TrendingFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout="@layout/fragment_trending" />
-
-        <fragment
-            android:id="@+id/fragment_playlist_overview"
-            android:name="com.example.prmmusic.fragment.PlaylistOverviewFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout="@layout/fragment_playlist_overview" />
-
-        <fragment
-            android:id="@+id/fragment_topic_overview"
-            android:name="com.example.prmmusic.fragment.TopicOverviewFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout="@layout/fragment_topic_overview" />
-
-        <fragment
-            android:id="@+id/fragment_album_overview"
-            android:name="com.example.prmmusic.fragment.AlbumOverviewFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout="@layout/fragment_album_overview" />
-    </LinearLayout>
-</ScrollView>
+    tools:layout="@layout/fragment_main" />

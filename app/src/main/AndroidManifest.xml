@@ -12,32 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PRMMusic"
         android:usesCleartextTraffic="true">
-
         <activity
             android:name=".activity.MusicPlayList"
-            android:exported="true"
-            >
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".activity.AllTopicActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            >
-        </activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".activity.ListTypeByTopicActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            >
-        </activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".activity.AlbumListActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            >
-        </activity>
-
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".activity.MainActivity"
             android:exported="true">
@@ -49,15 +38,12 @@
         </activity>
         <activity
             android:name=".activity.MusicPlayerActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".activity.PlaylistActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:exported="true">
-        </activity>
-        <service android:name=".service.PlayerService"/>
-    </application>
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
+        <service android:name=".service.PlayerService" />
+    </application>
 </manifest>
